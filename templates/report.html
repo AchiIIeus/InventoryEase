@@ -1,1 +1,13 @@
-
+{% extends "base.html" %}
+{% block content %}
+<h2>Reports</h2>
+<p><strong>Total Stock Value:</strong> ₱ {{ '%.2f'|format(total_value) }}</p>
+<h3>Low Stock (≤ 5)</h3>
+<ul>
+  {% for item in low_stock %}
+    <li>{{ item.name }} — Qty: {{ item.quantity }}</li>
+  {% else %}
+    <li>No low-stock items 🎉</li>
+  {% endfor %}
+</ul>
+{% endblock %}
