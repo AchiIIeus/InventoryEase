@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
-db = SQLAlchemy()
+from extensions import db  # <-- use the shared instance here
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -17,7 +16,7 @@ def create_app(test_config=None):
     db.init_app(app)
 
     with app.app_context():
-        from models import User, Product  # noqa
+        from models import User, Product
         db.create_all()
 
     # ---- helpers ----
