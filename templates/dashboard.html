@@ -1,1 +1,14 @@
-
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="cards">
+  <div class="card">
+    <h3>Total Items</h3>
+    <p>{{ count }}</p>
+  </div>
+  <div class="card">
+    <h3>Total Stock Value</h3>
+    <p>₱ {{ '%.2f'|format(total_value) }}</p>
+  </div>
+</div>
+{% endblock %}
