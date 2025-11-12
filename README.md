@@ -10,7 +10,7 @@ InventoryEase was a Flask-based inventory management web app that helped small s
 
 ## Getting Started
 ```bash
-git clone <your-repo-url>.git
+git clone https://github.com/AchiIIeus/InventoryEase.git
 cd InventoryEase
 python -m venv venv
 # Windows
