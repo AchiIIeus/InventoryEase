@@ -1,1 +1,40 @@
 
+## templates/base.html
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InventoryEase</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>InventoryEase</h1>
+    {% if session.get('username') %}
+      <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('inventory_list') }}">Inventory</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+        <form action="{{ url_for('logout') }}" method="post" style="display:inline">
+          <button type="submit">Logout ({{ session.get('username') }})</button>
+        </form>
+      </nav>
+    {% endif %}
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flash">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer><small>&copy; 2025</small></footer>
+</body>
+</html>
