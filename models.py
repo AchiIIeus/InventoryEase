@@ -1,5 +1,5 @@
 from datetime import datetime
-from app import db
+from extensions import db  # <-- shared instance
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
