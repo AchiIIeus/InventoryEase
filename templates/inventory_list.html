@@ -1,1 +1,30 @@
-
+{% extends "base.html" %}
+{% block content %}
+<h2>Inventory</h2>
+<form method="get" class="search">
+  <input name="q" placeholder="Search name..." value="{{ q }}">
+  <button type="submit">Search</button>
+  <a href="{{ url_for('inventory_add') }}" class="button">+ Add Product</a>
+</form>
+<table>
+  <thead><tr><th>Name</th><th>Category</th><th>Qty</th><th>Price</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>₱ {{ '%.2f'|format(item.price) }}</td>
+      <td>
+        <a href="{{ url_for('inventory_edit', item_id=item.id) }}">Edit</a>
+        <form action="{{ url_for('inventory_delete', item_id=item.id) }}" method="post" style="display:inline">
+          <button type="submit" onclick="return confirm('Delete this item?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+      <tr><td colspan="5">No items yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
